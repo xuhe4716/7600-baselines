@@ -47,7 +47,7 @@ def convert_images_to_mnist_format(input_folder, output_folder, test_ratio=0.2, 
 def save_mnist_format(images, labels, image_path, label_path):
     # Save image data
     print(len(images))
-    image_header = np.array([0x0803, len(images), 256, 256], dtype='>i4')
+    image_header = np.array([0x0803, len(images), 224, 224], dtype='>i4')
     with open(image_path, "wb") as f:
         f.write(image_header.tobytes())
         f.write(images.tobytes())
@@ -59,7 +59,7 @@ def save_mnist_format(images, labels, image_path, label_path):
         f.write(labels.tobytes())
 
 # Example usage
-input_folder = '/Users/yifangbai/code/Github/Convert-own-data-to-MNIST-format/deciphered_eng'
-output_folder = 'output_256'
+input_folder = '/Users/yifangbai/Desktop/HUST-OBS/deciphered'
+output_folder = 'output_224'
 test_ratio = 0.2  # 20% of the data will be used for testing
-convert_images_to_mnist_format(input_folder, output_folder, test_ratio, 256, 256)
+convert_images_to_mnist_format(input_folder, output_folder, test_ratio, 224, 224)

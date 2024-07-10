@@ -21,7 +21,7 @@ class Dataset:
             labels = np.frombuffer(lbpath.read(), dtype=np.uint8, offset=8)
 
         with gzip.open(images_path, 'rb') as imgpath:
-            images = np.frombuffer(imgpath.read(), dtype=np.uint8, offset=16).reshape(len(labels), 28, 28)
+            images = np.frombuffer(imgpath.read(), dtype=np.uint8, offset=16).reshape(len(labels), self.image_size, self.image_size)
 
         print('The size of %s set: %d'%(kind, len(labels)))
 

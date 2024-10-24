@@ -1,6 +1,6 @@
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings, HuggingFaceBgeEmbeddings
 from langchain.vectorstores import Pinecone
 from langchain.llms import HuggingFaceHub
 from dotenv import load_dotenv
@@ -21,13 +21,25 @@ class ChatBot:
     def __init__(self):
 
         # Load and split documents
-        loader = TextLoader('./materials/chinese.txt')
+        loader = TextLoader('./materials/Rag_document.txt')
         documents = loader.load()
-        text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=4)
+        text_splitter = CharacterTextSplitter(chunk_size=200, chunk_overlap=40)
         docs = text_splitter.split_documents(documents)
 
+
         # Initialize embeddings
-        embeddings = HuggingFaceEmbeddings()
+        model_name = "BAAI/bge-base-zh-v1.5"
+        model_kwargs = {'device': 'cpu'}
+        encode_kwargs = {'normalize_embeddings': True} # set True to compute cosine similarity
+        embeddings = HuggingFaceBgeEmbeddings(
+            model_name=model_name,
+            model_kwargs=model_kwargs,
+            encode_kwargs=encode_kwargs
+            #query_instruction="为这个句子生成表示以用于检索相关文章："
+        )
+        #embeddings.query_instruction = "为这个句子生成表示以用于检索相关文章："
+        #embeddings = HuggingFaceEmbeddings()
+
 
         # Initialize Pinecone instance
         pc = Pinecone(api_key= os.getenv('PINECONE_API_KEY'))

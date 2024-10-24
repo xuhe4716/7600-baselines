@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="360dfaeb-0603-4925-aef4-6e82a6fd015c" name="Changes" comment="" />
+    <list default="true" id="360dfaeb-0603-4925-aef4-6e82a6fd015c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/Rag_document.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/materials/完成 (1).xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAG_ChatBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/RAG_ChatBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/Chinese_charater.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/Chinese_charater2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/chinese.txt" beforeDir="false" afterPath="$PROJECT_DIR$/materials/chinese.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1729664990183</updated>
       <workItem from="1729664993273" duration="12512000" />
-      <workItem from="1729701150537" duration="68000" />
+      <workItem from="1729701150537" duration="3761000" />
     </task>
     <servers />
   </component>

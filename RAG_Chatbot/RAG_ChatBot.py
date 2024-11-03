@@ -1,5 +1,5 @@
 from langchain.document_loaders import TextLoader
-from langchain.text_splitter import CharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings, HuggingFaceBgeEmbeddings
 from langchain.vectorstores import Pinecone
 from langchain.llms import HuggingFaceHub
@@ -17,20 +17,25 @@ from langchain_openai import ChatOpenAI
 import faiss
 from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
+from uuid import uuid4
 
+from langchain_core.documents import Document
 
 class ChatBot:
     load_dotenv()
     def __init__(self):
 
+        print("File Loading...")
         # Load and split documents
         loader = TextLoader('./materials/chinese.txt')
-        # loader = TextLoader('./materials/torontoTravelAssistant.txt')
         documents = loader.load()
-        text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=40)
+
+        print("Chunking...")
+        # Chunking
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=20)
         docs = text_splitter.split_documents(documents)
 
-
+        print("Initialize embeddings...")
         # Initialize embeddings
         model_name = "BAAI/bge-base-zh-v1.5"
         model_kwargs = {'device': 'cpu'}
@@ -41,23 +46,30 @@ class ChatBot:
             encode_kwargs=encode_kwargs
         )
 
-        # Initial vector db
-        index = faiss.IndexFlatL2(len(embeddings.embed_query("hello world")))
+        print("Initialize vector database...")
+        # Initialize Pinecone instance
+        pc = Pinecone(api_key= os.getenv('PINECONE_API_KEY'))
 
-        vector_store = FAISS(
-            embedding_function=embeddings,
-            index=index,
-            docstore=InMemoryDocstore(),
-            index_to_docstore_id={},
-        )
+        index_name = "langchain-demo"
 
-        vector_dir = "vector"
-        if not os.path.exists(f'./materials/{vector_dir}'):
-            os.makedirs(vector_dir)
-            print(f"Created directory: {vector_dir}")
+        if index_name not in pc.list_indexes().names():
+            print("yes")
+            pc.create_index(
+                name=index_name,
+                dimension=768,
+                metric="cosine",
+                spec=ServerlessSpec(
+                    cloud="aws",
+                    region="us-east-1"
+                )
+            )
+            #index = pc.Index(index_name)
+            docsearch = PineconeVectorStore.from_documents(docs, embeddings, index_name=index_name)
 
-        vector_store.save_local('./materials/vector')
+        vectorstore = PineconeVectorStore(index_name=index_name, embedding=embeddings)
 
+
+        print("Initialize ChatOpenAI...")
         # Initialize ChatOpenAI
         model_name = "gpt-3.5-turbo"
         llm = ChatOpenAI(model_name=model_name, organization='')
@@ -66,14 +78,13 @@ class ChatBot:
         # Define prompt template
         template = """
         You are a museum assistant for ancient Chinese characters. Users will ask you questions about Chinese characters. Use the following piece of context to answer the question.
-        You should tell the user the 3 义项描述 of the word, and corresponding 语料 examples of the character.
         You should give the answer in English. Just like the following examples:
         Question: What does 爱 mean?
-        Answer: Meanings: \
-                1.Like, hobby (喜爱，爱好)\
-                2.love, favor, admire, love (爱护，加惠，钦慕，爱戴)\
-                Examples: \
-                1.[爱]此沧江闲白鸥。([Love] The white gulls idle in the vast river.)\
+        Answer: Meanings: \\
+                1.Like, hobby (喜爱，爱好)\\
+                2.love, favor, admire, love (爱护，加惠，钦慕，爱戴)\\
+                Examples: \\
+                1.[爱]此沧江闲白鸥。([Love] The white gulls idle in the vast river.)\\
                 2.[爱]好人物，善诱无倦，士类以此高之。(He likes people and is tireless in his efforts to persuade them, and scholars admire him for this.)
         If you don't know the answer, just say you don't know.
         Your answer should be precise.
@@ -85,8 +96,10 @@ class ChatBot:
 
         prompt = PromptTemplate(template=template, input_variables=["context", "question"])
 
+
+        print("Retrieval answer...")
         self.rag_chain = RetrievalQA.from_chain_type(
-            llm, retriever=vector_store.as_retriever(), chain_type_kwargs={"prompt": prompt}
+            llm, retriever=vectorstore.as_retriever(search_kwargs={"k": 3}), chain_type_kwargs={"prompt": prompt}
         )
 
 

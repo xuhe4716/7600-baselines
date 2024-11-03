@@ -5,8 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RAG_ChatBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/RAG_ChatBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/materials/Rag_document.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/materials/chinese.txt" beforeDir="false" afterPath="$PROJECT_DIR$/materials/chinese.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/vector/index.faiss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/vector/index.pkl" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +27,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file:///opt/anaconda3/lib/python3.8/site-packages/pinecone/core/openapi/shared/rest.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/.env" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/RAG_ChatBot.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2npLI6gCqj33UuI7CFwxNbkYByG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -42,6 +42,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/materials" />
       <recent name="$PROJECT_DIR$" />
@@ -57,7 +60,7 @@
       <updated>1729664990183</updated>
       <workItem from="1729664993273" duration="12512000" />
       <workItem from="1729701150537" duration="5968000" />
-      <workItem from="1730288286353" duration="6665000" />
+      <workItem from="1730288286353" duration="20892000" />
     </task>
     <servers />
   </component>

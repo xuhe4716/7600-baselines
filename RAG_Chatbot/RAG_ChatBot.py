@@ -71,22 +71,23 @@ class ChatBot:
 
         print("Initialize ChatOpenAI...")
         # Initialize ChatOpenAI
-        model_name = "gpt-3.5-turbo"
-        llm = ChatOpenAI(model_name=model_name, organization='')
+        model_name = "gpt-4o-mini"
+        llm = ChatOpenAI(model_name=model_name, temperature=0)
 
 
         # Define prompt template
         template = """
         You are a museum assistant for ancient Chinese characters. Users will ask you questions about Chinese characters. Use the following piece of context to answer the question.
+        You should give the meanings and corresponding examples.
         You should give the answer in English. Just like the following examples:
         Question: What does 爱 mean?
-        Answer: Meanings: \\
-                1.Like, hobby (喜爱，爱好)\\
-                2.love, favor, admire, love (爱护，加惠，钦慕，爱戴)\\
-                Examples: \\
-                1.[爱]此沧江闲白鸥。([Love] The white gulls idle in the vast river.)\\
+        Answer: Meanings: \
+                1.Like, hobby (喜爱，爱好)\
+                2.love, favor, admire, love (爱护，加惠，钦慕，爱戴)\
+                Examples: \
+                1.[爱]此沧江闲白鸥。([Love] The white gulls idle in the vast river.)\
                 2.[爱]好人物，善诱无倦，士类以此高之。(He likes people and is tireless in his efforts to persuade them, and scholars admire him for this.)
-        If you don't know the answer, just say you don't know.
+        If you don't know the answer, just say sorry to the user and say you don't know.
         Your answer should be precise.
         
         Context: {context}
@@ -99,7 +100,7 @@ class ChatBot:
 
         print("Retrieval answer...")
         self.rag_chain = RetrievalQA.from_chain_type(
-            llm, retriever=vectorstore.as_retriever(search_kwargs={"k": 3}), chain_type_kwargs={"prompt": prompt}
+            llm, retriever=vectorstore.as_retriever(search_kwargs={"k": 5}), chain_type_kwargs={"prompt": prompt}
         )
 
 

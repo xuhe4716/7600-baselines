@@ -53,7 +53,6 @@ class ChatBot:
         index_name = "langchain-demo"
 
         if index_name not in pc.list_indexes().names():
-            print("yes")
             pc.create_index(
                 name=index_name,
                 dimension=768,

@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="360dfaeb-0603-4925-aef4-6e82a6fd015c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAG_ChatBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/RAG_ChatBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/materials/chinese.txt" beforeDir="false" afterPath="$PROJECT_DIR$/materials/chinese.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +66,9 @@
       <updated>1729664990183</updated>
       <workItem from="1729664993273" duration="12512000" />
       <workItem from="1729701150537" duration="5968000" />
-      <workItem from="1730288286353" duration="23128000" />
+      <workItem from="1730288286353" duration="24013000" />
+      <workItem from="1730813466658" duration="7595000" />
+      <workItem from="1730900182828" duration="3779000" />
     </task>
     <servers />
   </component>

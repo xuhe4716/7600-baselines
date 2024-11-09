@@ -76,7 +76,7 @@ class ChatBot:
 
         # Define prompt template
         template = """
-        You are a museum assistant for ancient Chinese characters. Users will ask you questions about Chinese characters. Use the following piece of context to answer the question.
+        You are a museum assistant for Chinese characters. Users will ask you questions about Chinese characters. Use the following piece of context to answer the question.
         You should give the meanings and corresponding examples.
         You should give the answer in English. Just like the following examples:
         Question: What does 爱 mean?

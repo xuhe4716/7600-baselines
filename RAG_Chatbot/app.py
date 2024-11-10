@@ -11,6 +11,7 @@ st.title('Museum assistant for Chinese characters')
 # Function for generating LLM response
 def generate_response(input):
     result = bot.rag_chain.invoke(input)
+    print(result['source_documents'])
     return result
 
 # Store LLM generated responses

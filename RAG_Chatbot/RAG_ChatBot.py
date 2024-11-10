@@ -1,5 +1,5 @@
 from langchain.document_loaders import TextLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter, CharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings, HuggingFaceBgeEmbeddings
 from langchain.vectorstores import Pinecone
 from langchain.llms import HuggingFaceHub
@@ -21,6 +21,27 @@ from uuid import uuid4
 
 from langchain_core.documents import Document
 
+def split_document_by_newline(documents):
+    split_docs = []
+
+    for doc in documents:
+        lines = doc.page_content.split('\n')
+
+        for line_num, line in enumerate(lines, 1):
+            if line.strip():
+                split_docs.append(
+                    Document(
+                        page_content=line,
+                        metadata={
+                            **doc.metadata,           # 保留原始文檔的metadata
+                            'line_number': line_num,  # 添加行號
+                            'total_lines': len(lines) # 總行數
+                        }
+                    )
+                )
+
+    return split_docs
+
 class ChatBot:
     load_dotenv()
     def __init__(self):
@@ -32,8 +53,23 @@ class ChatBot:
 
         print("Chunking...")
         # Chunking
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=20)
+        '''
+        text_splitter = CharacterTextSplitter(
+            separator="\n",        # 使用換行符作為分隔符
+            chunk_size=10000,      # 設置很大的chunk_size以確保不會基於大小分割
+            chunk_overlap=0,       # 不需要重疊
+            length_function=len    # 可選，用於計算文本長度
+        )
         docs = text_splitter.split_documents(documents)
+        for i, doc in enumerate(docs):
+            doc.metadata.update({
+                "chunk_index": i,
+                "total_chunks": len(docs)
+            })
+        print(docs[0:5])
+        '''
+        docs = split_document_by_newline(documents)
+        #print(docs)
 
         print("Initialize embeddings...")
         # Initialize embeddings
@@ -89,6 +125,7 @@ class ChatBot:
         If you don't know the answer, just say sorry to the user and say you don't know.
         Your answer should be precise.
         
+        
         Context: {context}
         Question: {question}
         Answer:
@@ -99,7 +136,10 @@ class ChatBot:
 
         print("Retrieval answer...")
         self.rag_chain = RetrievalQA.from_chain_type(
-            llm, retriever=vectorstore.as_retriever(search_kwargs={"k": 5}), chain_type_kwargs={"prompt": prompt}
+            llm,
+            retriever=vectorstore.as_retriever(search_kwargs={"k": 5}),
+            chain_type_kwargs={"prompt": prompt},
+            return_source_documents=True
         )
 
 

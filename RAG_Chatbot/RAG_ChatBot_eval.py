@@ -75,7 +75,7 @@ class ChatBotEval:
 
         1. Use the provided context to understand the meanings and examples of the Chinese character in question.
         2. Provide the answer in both Chinese and English translation.
-        3. If you don't know the answer, just state that you don't know.
+        3. If you don't know the answer or you dont' get the information from the source, just state that you don't know.
         4. Do not include any information that is not from the original source.
         5. Ensure your answer is precise and avoid examples that contain gender discrimination or racism.
         6. Do not include any XML tags in your output.
@@ -313,7 +313,7 @@ def evaluate_rag_system(eval_file_path: str, chatbot: Any, output_csv: str):
     results = []
     for character in test_questions:
         # 构造查询问题
-        question = character
+        question = f"What does {character} mean?"
 
         # 使用chatbot生成答案
         answer = chatbot.generate_response(question)

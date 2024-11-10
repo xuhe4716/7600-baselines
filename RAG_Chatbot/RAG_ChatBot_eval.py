@@ -75,10 +75,9 @@ class ChatBotEval:
 
         1. Use the provided context to understand the meanings and examples of the Chinese character in question.
         2. Provide the answer in both Chinese and English translation.
-        3. If you don't know the answer or you dont' get the information from the source, just state that you don't know.
-        4. Do not include any information that is not from the original source.
-        5. Ensure your answer is precise and avoid examples that contain gender discrimination or racism.
-        6. Do not include any XML tags in your output.
+        3. If you don't know the answer, just state that you don't know and say sorry.
+        4. Ensure your answer is precise and avoid examples that contain gender discrimination or racism.
+        5. Do not include any XML tags in your output.
 
         Use the following format for your response:
         - Meanings: List the meanings of the character in Chinese and English. Provide corresponding examples in Chinese with English       translations.

@@ -71,23 +71,31 @@ class ChatBotEval:
 
         # Define prompt template
         template = """
-        You are a museum assistant for Chinese characters. Users will ask you questions about Chinese characters. Use the following piece of context to answer the question.
-        You should give the meanings and corresponding examples.
-        You should give the answer in English. Just like the following examples:
-        Question: What does 爱 mean?
-        Answer: Meanings: \
-                1.Like, hobby (喜爱，爱好)\
-                2.love, favor, admire, love (爱护，加惠，钦慕，爱戴)\
-                Examples: \
-                1.[爱]此沧江闲白鸥。([Love] The white gulls idle in the vast river.)\
-                2.[爱]好人物，善诱无倦，士类以此高之。(He likes people and is tireless in his efforts to persuade them, and scholars admire him for this.)
-        If you don't know the answer, just say sorry to the user and say you don't know.
-        Your answer should be precise.
-        
-        
+        You are a museum assistant specializing in ancient Chinese characters. Your task is to answer user questions based on the contents of       the oracle tool. Follow these steps to complete the task:
+
+        1. Use the provided context to understand the meanings and examples of the Chinese character in question.
+        2. Provide the answer in both Chinese and English translation.
+        3. If you don't know the answer, simply state that you don't know.
+        4. Ensure your answer is precise and avoid examples that contain gender discrimination or racism.
+        5. Do not include any XML tags in your output.
+
+        Use the following format for your response:
+        - Meanings: List the meanings of the character in Chinese and English. Provide corresponding examples in Chinese with English       translations.
+
         Context: {context}
         Question: {question}
+
         Answer:
+        Meanings:
+        1. [Meaning in Chinese] ([Meaning in English]) - [Example in Chinese]. ([Example in English])
+        2. [Meaning in Chinese] ([Meaning in English]) - [Example in Chinese]. ([Example in English])
+
+        You should give the answer just like the following examples:
+        Question: What does 爱 mean?
+        Answer:
+        Meanings: 
+        1. 喜爱，爱好 (Like, hobby). [爱]好人物，善诱无倦，士类以此高之。(He likes people and is tireless in his efforts to persuade them, and      scholars admire him for this.)
+        2. 爱护，加惠，钦慕，爱戴 (Love, favor, admire, love). [爱]此沧江闲白鸥。([Love] The white gulls idle in the vast river.)
         """
 
         prompt = PromptTemplate(template=template, input_variables=["context", "question"])
@@ -304,7 +312,7 @@ def evaluate_rag_system(eval_file_path: str, chatbot: Any, output_csv: str):
     results = []
     for character in test_questions:
         # 构造查询问题
-        question = f"what does {character} mean?"
+        question = character
 
         # 使用chatbot生成答案
         answer = chatbot.generate_response(question)

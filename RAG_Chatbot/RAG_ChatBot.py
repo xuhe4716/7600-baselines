@@ -106,7 +106,7 @@ class ChatBot:
         5. Do not include any XML tags in your output.
 
         Use the following format for your response:
-        - Meanings: List the meanings of the character in Chinese and English. Provide corresponding examples in Chinese with English       translations.
+        - Meanings: List the meanings of the character in Chinese and English. Provide corresponding examples in Chinese with English translations.
 
         Context: {context}
         Question: {question}
@@ -120,7 +120,7 @@ class ChatBot:
         Question: What does 爱 mean?
         Answer:
         Meanings: 
-        1. 喜爱，爱好 (Like, hobby). [爱]好人物，善诱无倦，士类以此高之。(He likes people and is tireless in his efforts to persuade them, and      scholars admire him for this.)
+        1. 喜爱，爱好 (Like, hobby). [爱]好人物，善诱无倦，士类以此高之。(He likes people and is tireless in his efforts to persuade them, and scholars admire him for this.)
         2. 爱护，加惠，钦慕，爱戴 (Love, favor, admire, love). [爱]此沧江闲白鸥。([Love] The white gulls idle in the vast river.)
         """
 

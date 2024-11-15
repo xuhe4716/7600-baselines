@@ -4,7 +4,9 @@
     <list default="true" id="360dfaeb-0603-4925-aef4-6e82a6fd015c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/rag_evaluation_overall_vector_Rag.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAG_ChatBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/RAG_ChatBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAG_ChatBot_eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/RAG_ChatBot_eval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/rag_evaluation_overal_vector_rag.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +99,7 @@
       <workItem from="1730288286353" duration="24013000" />
       <workItem from="1730813466658" duration="7595000" />
       <workItem from="1730900182828" duration="31725000" />
+      <workItem from="1731676447557" duration="8676000" />
     </task>
     <servers />
   </component>
@@ -104,6 +107,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/RAG_Chatbot$RAG_ChatBot_eval.coverage" NAME="RAG_ChatBot_eval Coverage Results" MODIFIED="1731502905862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/RAG_Chatbot$RAG_ChatBot_eval.coverage" NAME="RAG_ChatBot_eval Coverage Results" MODIFIED="1731676717215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
